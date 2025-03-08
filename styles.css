@@ -1,0 +1,999 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #e74c3c rgba(255, 255, 255, 0.2);
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #e74c3c;
+    border-radius: 20px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #2c3e50;
+    color: #fff;
+    position: relative; /* Ensure body has a position context for z-index */
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Lower z-index so content appears above */
+    pointer-events: none;
+    overflow: hidden; /* Prevent particles from causing scrollbars */
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: rise 15s infinite linear;
+    opacity: 0.6;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4); /* Stronger glow */
+    z-index: 0; /* Ensure particles appear behind content */
+}
+
+/* Page layout styles */
+.page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+    z-index: 2; /* Ensure page content stays above particles */
+    background-color: transparent; /* Remove background so particles show through */
+}
+
+.greeting-page {
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.8) 0%, rgba(74, 105, 189, 0.8) 100%); /* Semi-transparent background */
+    z-index: 2;
+}
+
+.gallery-page {
+    background: linear-gradient(135deg, rgba(30, 39, 46, 0.8) 0%, rgba(45, 52, 54, 0.8) 100%); /* Semi-transparent background */
+    z-index: 3;
+}
+
+.poem-page {
+    background: linear-gradient(135deg, rgba(20, 30, 48, 0.85) 0%, rgba(36, 59, 85, 0.85) 100%);
+    padding: 3rem 1rem;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Greeting page styles */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+    animation: fadeIn 2s ease-in-out, float 6s ease-in-out infinite;
+    margin-bottom: 2rem;
+}
+
+.highlight {
+    color: #e74c3c;
+}
+
+.scroll-indicator {
+    margin-top: 5rem;
+    opacity: 0.8;
+    animation: fadeIn 2s ease-in-out 1s both;
+}
+
+.scroll-indicator p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.scroll-indicator i {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+/* Gallery page styles */
+.gallery-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.gallery-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.gallery-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.gallery {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.gallery img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.gallery img.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.gallery-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    color: #fff;
+    font-size: 1.1rem;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.image-counter {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.jump-to-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.jump-to-container label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.jump-to-container input {
+    width: 80px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.jump-to-container input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.jump-to-container button {
+    background-color: rgba(231, 76, 60, 0.7);
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.jump-to-container button:hover {
+    background-color: rgba(231, 76, 60, 1);
+}
+
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 0 20px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.gallery-btn {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+}
+
+.gallery-btn:hover {
+    background-color: rgba(231, 76, 60, 0.8);
+    transform: scale(1.1);
+}
+
+.gallery-btn:active {
+    transform: scale(0.95);
+}
+
+.gallery-btn i {
+    font-size: 1.2rem;
+}
+
+/* Thumbnails */
+.thumbnails-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 20px 0;
+    margin-top: 20px;
+    scroll-behavior: smooth;
+}
+
+.thumbnail {
+    width: 100px;
+    height: 70px;
+    border-radius: 6px;
+    cursor: pointer;
+    object-fit: cover;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.thumbnail:hover {
+    opacity: 0.9;
+}
+
+.thumbnail.active {
+    opacity: 1;
+    box-shadow: 0 0 0 3px #e74c3c;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #e74c3c;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+.loading-spinner p {
+    font-size: 1.1rem;
+    color: #ddd;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: translateY(20px);
+    z-index: 100;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: #c0392b;
+    transform: translateY(-5px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes rise {
+    0% {
+        bottom: -10%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8; /* Make particles more visible */
+    }
+    90% {
+        opacity: 0.8; /* Make particles more visible */
+    }
+    100% {
+        bottom: 110%;
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 4rem;
+    }
+    
+    .gallery-header h2 {
+        font-size: 2.5rem;
+    }
+    
+    .gallery {
+        height: 400px;
+    }
+    
+    .poem-title {
+        font-size: 3rem;
+    }
+    
+    .poem-content {
+        font-size: 1.1rem;
+    }
+    
+    .poem-container {
+        padding: 2.5rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    .gallery-header h2 {
+        font-size: 2rem;
+    }
+    
+    .gallery {
+        height: 350px;
+    }
+    
+    .gallery-container {
+        padding: 20px;
+    }
+    
+    .thumbnail {
+        width: 80px;
+        height: 60px;
+    }
+    
+    .poem-title {
+        font-size: 2.5rem;
+    }
+    
+    .poem-content {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+    
+    .poem-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .gallery-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .jump-to-container {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .gallery-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .gallery {
+        height: 300px;
+    }
+    
+    .gallery-container {
+        padding: 15px;
+    }
+    
+    .gallery-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .thumbnail {
+        width: 70px;
+        height: 50px;
+    }
+    
+    .poem-title {
+        font-size: 2rem;
+    }
+    
+    .poem-content {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .poem-container {
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* Navigation buttons between pages */
+.navigation-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-btn {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+}
+
+.nav-btn:hover {
+    background-color: rgba(231, 76, 60, 0.6);
+    transform: translateY(-3px);
+}
+
+.nav-btn i {
+    font-size: 0.9rem;
+}
+
+/* Poem page specific styles */
+.poem-container {
+    max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.poem-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.poem-content {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.poem-content p {
+    margin-bottom: 2.2rem;
+}
+
+.poem-content .highlight {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.poem-footer {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.back-to-top-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-to-top-btn:hover {
+    background-color: rgba(231, 76, 60, 0.6);
+}
+
+/* Updated poem page styles for side-by-side layout */
+.poem-page {
+    background: linear-gradient(135deg, rgba(20, 30, 48, 0.85) 0%, rgba(36, 59, 85, 0.85) 100%);
+    padding: 3rem 1rem;
+}
+
+.poems-container {
+    max-width: 1400px; /* Wider container for two poems */
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.poems-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.poems-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.poem-container {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.poem-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.poem-content {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.poem-content p {
+    margin-bottom: 2rem;
+}
+
+.poem-content .highlight {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.poem-footer {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.back-to-top-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-to-top-btn:hover {
+    background-color: rgba(231, 76, 60, 0.6);
+}
+
+/* Media queries for responsive poem layout */
+@media (max-width: 1200px) {
+    .poems-layout {
+        gap: 1.5rem;
+    }
+    
+    .poem-container {
+        padding: 1.5rem;
+    }
+    
+    .poem-content {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .poems-title {
+        font-size: 3rem;
+    }
+    
+    .poems-layout {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    
+    .poem-container {
+        padding: 2rem;
+    }
+    
+    .poem-content {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .poems-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .poems-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .poem-content {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 480px) {
+    .poems-title {
+        font-size: 2rem;
+    }
+    
+    .poems-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .poem-content {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
+
+/* Gallery improvements for large number of images */
+.gallery-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+/* Beautiful animated footer styles */
+.animated-footer {
+    width: 100%;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, rgba(22, 34, 42, 0.95) 0%, rgba(58, 96, 115, 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 1.5rem;
+    z-index: 2;
+}
+
+.footer-text-container {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.footer-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    animation: fadeUp 1.5s ease-out both;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.footer-date {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 2px;
+    animation: fadeUp 1.5s ease-out 0.3s both;
+}
+
+.heart-icon {
+    color: #e74c3c;
+    display: inline-block;
+    animation: heartBeat 1.5s ease infinite;
+    font-size: 1.4rem;
+    position: relative;
+    top: 2px;
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+.footer-pulse {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(231, 76, 60, 0.2) 0%, rgba(231, 76, 60, 0) 70%);
+    border-radius: 50%;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 4s ease infinite;
+}
+
+/* Star animations in footer */
+.footer-stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 5s infinite;
+    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.6);
+}
+
+.star-1 {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.star-2 {
+    top: 30%;
+    left: 80%;
+    animation-delay: 1s;
+}
+
+.star-3 {
+    top: 60%;
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.star-4 {
+    top: 70%;
+    left: 65%;
+    animation-delay: 3s;
+}
+
+.star-5 {
+    top: 40%;
+    left: 40%;
+    animation-delay: 4s;
+}
+
+.star-6 {
+    top: 25%;
+    left: 60%;
+    animation-delay: 0.5s;
+}
+
+/* Footer animations */
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.3);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.3);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.3;
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+/* Responsive adjustments for the footer */
+@media (max-width: 768px) {
+    .footer-text {
+        font-size: 1.1rem;
+    }
+    
+    .footer-date {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .animated-footer {
+        padding: 1.5rem 0;
+    }
+    
+    .footer-text {
+        font-size: 1rem;
+    }
+}
