@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingSpinner = document.getElementById('loadingSpinner');
     
     // Configuration for image loading - Updated for all 746 images
-    const TOTAL_IMAGES = 746; 
+    const TOTAL_IMAGES = 50; 
     const EXTENSIONS = ['.jpg', '.heic', '.jpeg', '.mp4'];
     const FOLDER_PATH = 'Michelle/';
     
