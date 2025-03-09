@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Auto slideshow (uncomment if you want this feature)
-    /*
+
     let slideshowInterval = setInterval(() => {
         if (!isLoading) {
             showImage(currentImageIndex + 1);
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 5000);
     });
-    */
+
     
     // Add jump-to functionality
     const jumpToInput = document.getElementById('jumpToInput');
