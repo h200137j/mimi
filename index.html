@@ -3,77 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hie Michelle</title>
+    <title>For Michelle</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Particles container moved to top level, outside sections -->
-    <div class="particles" id="particles"></div>
+    <!-- Floating elements container -->
+    <div class="floating-elements" id="floatingElements"></div>
     
-    <!-- First Page - Greeting -->
+    <!-- First Page - Elegant Greeting -->
     <section class="page greeting-page" id="greeting">
-        <div class="container">
-            <h1>hie <span class="highlight">michelle</span></h1>
-            <div class="scroll-indicator">
-                <p>know you are loved</p>
-                <i class="fas fa-chevron-down bounce"></i>
+        <div class="container greeting-container">
+            <div class="greeting-content">
+                <h1 class="fancy-title">hie <span class="emphasis">michelle</span></h1>
+                <div class="greeting-message">
+                    <p>know you are loved</p>
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-text">discover more</span>
+                    <i class="fas fa-chevron-down elegant-bounce"></i>
+                </div>
             </div>
         </div>
+        <div class="decorative-corner top-left"></div>
+        <div class="decorative-corner top-right"></div>
+        <div class="decorative-corner bottom-left"></div>
+        <div class="decorative-corner bottom-right"></div>
     </section>
     
-    <!-- Second Page - Gallery -->
+    <!-- Second Page - Elegant Gallery -->
     <section class="page gallery-page" id="gallery">
-        <!-- <div class="gallery-header">
-            <h2>Your <span class="highlight">Gallery</span></h2>
-            <p class="gallery-subtitle">Collection of beautiful memories</p>
-        </div> -->
+        <div class="page-header">
+            <h2 class="section-title">Cherished <span class="emphasis">Memories</span></h2>
+            <div class="title-underline"></div>
+        </div>
         
         <div class="gallery-container">
-            <div class="gallery" id="imageGallery">
-                <!-- Images will be loaded here dynamically -->
-                <div class="loading-spinner" id="loadingSpinner">
-                    <div class="spinner"></div>
-                    <p>Loading your beautiful memories...</p>
+            <div class="gallery-frame">
+                <div class="gallery" id="imageGallery">
+                    <!-- Images will be loaded here dynamically -->
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <div class="elegant-spinner"></div>
+                        <p>Unveiling our beautiful moments...</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="gallery-info" id="galleryInfo">
-                <!-- <div class="image-counter">
-                    <span id="currentImage">1</span> / <span id="totalImages">746</span>
-                </div> -->
-                
-                <!-- Added jump to image input -->
-                <!-- <div class="jump-to-container">
-                    <label for="jumpToInput">Jump to:</label>
-                    <input type="number" id="jumpToInput" min="1" max="746" placeholder="Image #">
-                    <button id="jumpToBtn">Go</button>
-                </div> -->
-            </div>
+            <div class="gallery-info" id="galleryInfo"></div>
             
             <div class="gallery-controls">
                 <button id="prevBtn" class="gallery-btn"><i class="fas fa-chevron-left"></i></button>
                 <button id="nextBtn" class="gallery-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
             
-            <div class="thumbnails-container" id="thumbnailsContainer">
-                <!-- Thumbnails will be loaded here -->
+            <div class="thumbnails-wrapper">
+                <div class="thumbnails-container" id="thumbnailsContainer">
+                    <!-- Thumbnails will be loaded here -->
+                </div>
             </div>
         </div>
         
-        <button class="back-to-top" id="backToTop">
+        <button class="elegant-button back-to-top" id="backToTop">
             <i class="fas fa-arrow-up"></i>
         </button>
         
         <div class="navigation-buttons">
-            <button class="nav-btn poem-btn">
-                <span>Read a poem for you</span>
-                <i class="fas fa-arrow-down"></i>
+            <button class="elegant-button poem-btn">
+                <span>Read poetry written for you</span>
+                <i class="fas fa-heart"></i>
             </button>
+        </div>
+        
+        <div class="section-divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon"><i class="fas fa-heart"></i></div>
+            <div class="divider-line"></div>
         </div>
     </section>
     
-    <!-- Third Page - Poems -->
+    <!-- Third Page - Elegant Poems -->
     <section class="page poem-page" id="poem">
         <div class="container poems-container">
             <h2 class="poems-title">Lunavere</h2>
@@ -89,7 +98,7 @@
                             a syntax of event horizons<br>
                             where light bends into prayer.<br>
                             I have mapped this silence,<br>
-                            <span class="highlight">Michelle</span>—<br>
+                            <span class="emphasis">Michelle</span>—<br>
                             traced your name in the static<br>
                             of dying constellations,<br>
                             in the afterglow of supernovae<br>
@@ -138,9 +147,11 @@
                             and whisper,<br>
                             Behold—<br>
                             the lunavere<br>
-                            is <span class="highlight">Michelle</span>.
+                            is <span class="emphasis">Michelle</span>.
                         </p>
                     </div>
+                    <div class="poem-decoration left"></div>
+                    <div class="poem-decoration right"></div>
                 </div>
                 
                 <!-- Second Poem -->
@@ -151,7 +162,7 @@
                             spun it taut as the bowstring of Artemis,<br>
                             then severed it clean, a sickle's kiss.<br>
                             Now I drift where even Styx grows jealous,<br>
-                            <span class="highlight">Michelle</span>,<br>
+                            <span class="emphasis">Michelle</span>,<br>
                             a shade without his Eurydice,<br>
                             cursing the oars of Charon's leaky boat<br>
                             as he ferries my pulse to its cold eclipse.
@@ -230,27 +241,32 @@
                         <p>
                             Behold—<br>
                             the lunavere<br>
-                            is <span class="highlight">Michelle</span>.
+                            is <span class="emphasis">Michelle</span>.
                         </p>
                     </div>
+                    <div class="poem-decoration left"></div>
+                    <div class="poem-decoration right"></div>
                 </div>
             </div>
             
             <div class="poem-footer">
-                <button class="back-to-top-btn" id="poemBackToTop">
-                    <i class="fas fa-arrow-up"></i> Back to top
+                <button class="elegant-button back-to-top-btn" id="poemBackToTop">
+                    <i class="fas fa-arrow-up"></i> Return to beginning
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- Footer with Animations -->
-    <footer class="animated-footer">
+    <!-- Elegant Footer -->
+    <footer class="elegant-footer">
         <div class="footer-content">
-            <div class="footer-pulse"></div>
-            <div class="footer-text-container">
-                <p class="footer-text">Created by <span class="highlight">Uriel</span> with <span class="heart-icon">❤</span> for <span class="highlight">Michelle</span></p>
-                <p class="footer-date">♥ <span id="currentYear">2025</span> ♥</p>
+            <div class="footer-design">
+                <div class="footer-ornament left"></div>
+                <div class="footer-message">
+                    <p class="footer-text">Created with <span class="heart-animation"><i class="fas fa-heart"></i></span> by <span class="emphasis">Uriel</span> for <span class="emphasis">Michelle</span></p>
+                    <p class="footer-date"><span id="currentYear">2025</span></p>
+                </div>
+                <div class="footer-ornament right"></div>
             </div>
             <div class="footer-stars">
                 <div class="star star-1"></div>
@@ -263,7 +279,7 @@
         </div>
     </footer>
 
-    <!-- Import script at end of body to ensure DOM is loaded first -->
+    <!-- Import script at end of body -->
     <script src="script.js"></script>
 </body>
 </html>
