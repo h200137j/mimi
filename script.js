@@ -381,4 +381,107 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentYearElement) {
         currentYearElement.textContent = new Date().getFullYear();
     }
+
+    // Create and manage particles
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const colors = [
+            'rgba(168, 81, 110, 0.5)', // Pink
+            'rgba(212, 165, 165, 0.4)', // Light pink
+            'rgba(240, 208, 208, 0.4)', // Very light pink
+            'rgba(255, 255, 255, 0.5)', // White
+            'rgba(124, 77, 105, 0.3)'  // Dark pink
+        ];
+        
+        // Number of particles based on screen size
+        const width = window.innerWidth;
+        const numberOfParticles = width < 768 ? 50 : 100;
+        
+        // Create particles
+        for (let i = 0; i < numberOfParticles; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Randomly choose between different particle types
+            const particleType = Math.random() > 0.7 ? 
+                (Math.random() > 0.5 ? 'heart' : 'star') : 'circle';
+            particle.classList.add(particleType);
+            
+            // Random properties
+            const size = particleType === 'heart' ? 
+                (Math.random() * 15 + 10) : (Math.random() * 6 + 2);
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            
+            // Duration and delay
+            const duration = Math.random() * 60 + 30;
+            const delay = Math.random() * 20;
+            
+            // Apply styles
+            particle.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                background-color: ${particleType === 'circle' ? color : 'transparent'};
+                left: ${left}%;
+                top: ${top}%;
+                animation-duration: ${duration}s;
+                animation-delay: ${delay}s;
+                opacity: ${Math.random() * 0.7 + 0.3};
+                box-shadow: 0 0 ${Math.random() * 10 + 5}px ${color};
+            `;
+            
+            // Special styles for heart and star particles
+            if (particleType === 'heart') {
+                particle.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="${encodeURIComponent(color)}" d="M50 90 C100 65 100 25 75 10 C60 0 50 10 50 20 C50 10 40 0 25 10 C0 25 0 65 50 90 Z"/></svg>')`;
+                particle.style.backgroundSize = 'contain';
+            } else if (particleType === 'star') {
+                particle.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="${encodeURIComponent(color)}" d="M50 0 L63 38 H100 L69 61 L82 100 L50 76 L18 100 L31 61 L0 38 H37 Z"/></svg>')`;
+                particle.style.backgroundSize = 'contain';
+            }
+            
+            particlesContainer.appendChild(particle);
+        }
+    }
+    
+    // Initialize particles
+    createParticles();
+    
+    // Recreate particles occasionally to keep the animation fresh
+    setInterval(function() {
+        const particlesContainer = document.getElementById('particles');
+        if (particlesContainer) {
+            particlesContainer.innerHTML = '';
+            createParticles();
+        }
+    }, 60000); // Refresh every minute
+    
+    // Add additional particles occasionally
+    setInterval(function() {
+        const particlesContainer = document.getElementById('particles');
+        if (!particlesContainer) return;
+        
+        // Add a few new particles
+        for (let i = 0; i < 5; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle', 'heart');
+            
+            const size = Math.random() * 20 + 15;
+            const color = 'rgba(168, 81, 110, 0.6)';
+            const left = Math.random() * 100;
+            
+            particle.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="${encodeURIComponent(color)}" d="M50 90 C100 65 100 25 75 10 C60 0 50 10 50 20 C50 10 40 0 25 10 C0 25 0 65 50 90 Z"/></svg>');
+                background-size: contain;
+                left: ${left}%;
+                top: 110%;
+                animation: floatUp 30s linear forwards;
+                opacity: ${Math.random() * 0.8 + 0.2};
+            `;
+            
+            particlesContainer.appendChild(particle);
+        }
+    }, 10000);
 });
